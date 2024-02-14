@@ -1,6 +1,4 @@
-import 'package:flutter_gl/flutter_gl.dart';
-import 'package:three_dart/three_dart.dart';
-
+import 'package:flutter_gl/flutter_gl.dart';import 'package:three_dart/three_dart.dart';
 T? arrayMin<T extends num>(List<T> array) {
   if (array.isEmpty) return null; //return 9999999;
 

@@ -1,6 +1,5 @@
 
 import 'package:three_dart/three3d/math/index.dart';
-
 class ThreeHelper {
   // 绕某个点旋转
   // https://stackoverflow.com/questions/42812861/three-js-pivot-point/42866733#42866733

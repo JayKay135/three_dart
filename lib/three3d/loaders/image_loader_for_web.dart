@@ -1,6 +1,5 @@
 import 'dart:async';
-import 'package:three_dart/extra/Blob.dart';
-import 'dart:html' as html;
+import 'package:three_dart/extra/blob.dart';import 'dart:html' as html;
 
 class ImageLoaderLoader {
   // flipY
