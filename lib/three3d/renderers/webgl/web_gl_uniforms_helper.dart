@@ -1,11 +1,9 @@
 part of three_webgl;
 
-var emptyTexture =
-    Texture(null, null, null, null, null, null, null, null, null, null);
+var emptyTexture = Texture(null, null, null, null, null, null, null, null, null, null);
 var emptyArrayTexture = DataArrayTexture(null);
 var empty3dTexture = Data3DTexture();
-var emptyCubeTexture =
-    CubeTexture(null, null, null, null, null, null, null, null, null, null);
+var emptyCubeTexture = CubeTexture(null, null, null, null, null, null, null, null, null, null);
 
 // --- Utilities ---
 
@@ -59,7 +57,6 @@ class SingleUniform with WebGLUniformsHelper {
   // }
 
   // this.path = activeInfo.name; // DEBUG
-
 }
 
 class PureArrayUniform with WebGLUniformsHelper {
@@ -182,11 +179,7 @@ parseUniform(activeInfo, addr, WebGLUniform container) {
     if (subscript == null || subscript == '[' && matchEnd + 2 == pathLength) {
       // bare name or "pure" bottom-level array "[0]" suffix
 
-      addUniform(
-          container,
-          subscript == null
-              ? SingleUniform(id, activeInfo, addr)
-              : PureArrayUniform(id, activeInfo, addr));
+      addUniform(container, subscript == null ? SingleUniform(id, activeInfo, addr) : PureArrayUniform(id, activeInfo, addr));
 
       break;
     } else {
@@ -216,9 +209,7 @@ class WebGLUniformsHelper {
   Float32Array flatten(List array, int nBlocks, int blockSize) {
     var firstElem = array[0];
 
-    if (firstElem.runtimeType == num ||
-        firstElem.runtimeType == double ||
-        firstElem.runtimeType == int) {
+    if (firstElem.runtimeType == num || firstElem.runtimeType == double || firstElem.runtimeType == int) {
       List<double> array2 = [];
 
       for (var element in array) {
@@ -285,7 +276,6 @@ class WebGLUniformsHelper {
       //     });
       //   }
       // }
-
     }
 
     return r;
@@ -359,12 +349,12 @@ class WebGLUniformsHelper {
   setValueV2f(gl, v, [WebGLTextures? textures]) {
     var cache = this.cache;
 
-    if (v.x != null) {
-      if (cache[0] != v.x || cache[1] != v.y) {
-        gl.uniform2f(addr, v.x, v.y);
+    if (v.containsKey("x") && v.containsKey("y")) {
+      if (cache[0] != v["x"] || cache[1] != v["y"]) {
+        gl.uniform2f(addr, v["x"], v["y"]);
 
-        cache[0] = v.x;
-        cache[1] = v.y;
+        cache[0] = v["x"];
+        cache[1] = v["y"];
       }
     } else {
       if (arraysEqual(cache, v)) return;
@@ -416,10 +406,7 @@ class WebGLUniformsHelper {
     var cache = this.cache;
 
     if (v.runtimeType == Vector4) {
-      if (cache[0] != v.x ||
-          cache[1] != v.y ||
-          cache[2] != v.z ||
-          cache[3] != v.w) {
+      if (cache[0] != v.x || cache[1] != v.y || cache[2] != v.z || cache[3] != v.w) {
         gl.uniform4f(addr, v.x, v.y, v.z, v.w);
 
         cache[0] = v.x;
@@ -428,10 +415,7 @@ class WebGLUniformsHelper {
         cache[3] = v.w;
       }
     } else if (v is Color) {
-      if (cache[0] != v.r ||
-          cache[1] != v.g ||
-          cache[2] != v.b ||
-          cache[3] != 1.0) {
+      if (cache[0] != v.r || cache[1] != v.g || cache[2] != v.b || cache[3] != 1.0) {
         gl.uniform4f(addr, v.r, v.g, v.b, 1.0);
 
         cache[0] = v.r.toDouble();
@@ -440,10 +424,7 @@ class WebGLUniformsHelper {
         cache[3] = 1.0;
       }
     } else if (v is List) {
-      if (cache[0] != v[0] ||
-          cache[1] != v[1] ||
-          cache[2] != v[2] ||
-          cache[3] != v[3]) {
+      if (cache[0] != v[0] || cache[1] != v[1] || cache[2] != v[2] || cache[3] != v[3]) {
         gl.uniform4f(addr, v[0], v[1], v[2], v[3]);
 
         cache[0] = v[0];
